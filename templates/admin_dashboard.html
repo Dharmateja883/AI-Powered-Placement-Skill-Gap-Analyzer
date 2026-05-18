@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-brain me-2"></i>SkillBridge Admin
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                <span class="text-white me-3">Welcome, {{ session['full_name'] }}</span>
+                <a class="btn btn-outline-light btn-sm" href="/logout"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-4 py-4">
+        <h2 class="mt-4 mb-4">Placement Overview</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Top Stats Row -->
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card bg-primary text-white h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-uppercase mb-1">Total Students</h6>
+                                <h2 class="mb-0">{{ total_students }}</h2>
+                            </div>
+                            <i class="fas fa-users fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% for stat in placement_stats %}
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card {% if stat.placement_status == 'placed' %}bg-success{% else %}bg-warning text-dark{% endif %} text-white h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-uppercase mb-1">{{ stat.placement_status }}</h6>
+                                <h2 class="mb-0">{{ stat.count }}</h2>
+                            </div>
+                            <i class="fas fa-graduation-cap fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <!-- Department Stats -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Department Statistics</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Total</th>
+                                        <th>Placed</th>
+                                        <th>Avg CGPA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for dept in dept_stats %}
+                                    <tr>
+                                        <td>{{ dept.department }}</td>
+                                        <td>{{ dept.total }}</td>
+                                        <td>
+                                            <span class="badge bg-success">{{ dept.placed }}</span>
+                                        </td>
+                                        <td>{{ "%.2f"|format(dept.avg_cgpa) if dept.avg_cgpa else 'N/A' }}</td>
+                                    </tr>
+                                    {% else %}
+                                    <tr><td colspan="4" class="text-center">No data available</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Students -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Top Performing Students</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Dept</th>
+                                        <th>CGPA</th>
+                                        <th>Readiness</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for student in top_students %}
+                                    <tr>
+                                        <td>{{ student.full_name }}</td>
+                                        <td>{{ student.department }}</td>
+                                        <td>{{ student.cgpa }}</td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar {% if student.readiness_score > 80 %}bg-success{% elif student.readiness_score > 50 %}bg-warning text-dark{% else %}bg-danger{% endif %}" 
+                                                     role="progressbar" 
+                                                     style="width: {{ student.readiness_score }}%;" 
+                                                     aria-valuenow="{{ student.readiness_score }}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{ student.readiness_score }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr><td colspan="4" class="text-center">No data available</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Recent Companies -->
+            <div class="col-12 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Recent Companies</h6>
+                        <button class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add Company</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>Type</th>
+                                        <th>Added On</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for company in recent_companies %}
+                                    <tr>
+                                        <td><strong>{{ company.company_name }}</strong></td>
+                                        <td><span class="badge bg-secondary">{{ company.company_type }}</span></td>
+                                        <td>{{ company.added_on.strftime('%Y-%m-%d') if company.added_on else 'N/A' }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr><td colspan="4" class="text-center">No companies added yet</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
