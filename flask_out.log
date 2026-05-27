@@ -1,0 +1,14 @@
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [27/May/2026 13:48:51] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:49:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:50:26] "HEAD /login HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:50:44] "HEAD /register HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:52:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:52:46] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:52:50] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:52:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [27/May/2026 13:52:52] "GET /register HTTP/1.1" 200 -
+127.0.0.1 - - [27/May/2026 13:52:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -

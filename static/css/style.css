@@ -431,6 +431,123 @@ body {
 }
 
 /* ============================================
+   AI TICKET CLASSIFIER SPECIFIC STYLES
+   ============================================ */
+/* Utility Classes for 3D UI */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.drop-shadow-md {
+    text-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.text-shadow-glow {
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+.transition-transform {
+    transition: transform 0.2s ease-in-out;
+}
+
+.icon-link-hover:hover .transition-transform {
+    transform: translateX(4px);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+/* 3D Hover Lift */
+.hover-lift-3d {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+.hover-lift-3d:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+    z-index: 2;
+}
+
+/* Transform Hover (Buttons) */
+.transform-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.transform-hover:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Perspective container for 3D elements */
+.perspective-container {
+    perspective: 1000px;
+}
+
+/* Ticket Animation */
+.ticket-animation-wrapper {
+    position: relative;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.ticket-card {
+    position: absolute;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    animation: float-3d 6s ease-in-out infinite;
+    border-left-width: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, rgba(33,37,41,0.9) 0%, rgba(52,58,64,0.9) 100%);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.ticket-card.card-1 { top: 40px; left: 10px; animation-delay: 0s; transform: rotateY(15deg); }
+.ticket-card.card-2 { top: 60px; right: 10px; animation-delay: 1.5s; transform: rotateY(-15deg); }
+.ticket-card.card-3 { bottom: 80px; left: 20px; animation-delay: 3s; transform: rotateY(10deg); }
+.ticket-card.card-4 { bottom: 60px; right: 20px; animation-delay: 4.5s; transform: rotateY(-10deg); }
+
+@keyframes float-3d {
+    0%, 100% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+    50% { transform: translateY(-20px) rotateX(-5deg) rotateY(10deg); }
+}
+
+.ai-core-glow {
+    background: linear-gradient(145deg, rgba(13, 110, 253, 0.2), rgba(102, 16, 242, 0.2));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(13, 110, 253, 0.4), inset 0 0 20px rgba(255,255,255,0.1);
+    animation: pulse-core 3s ease-in-out infinite;
+}
+
+@keyframes pulse-core {
+    0%, 100% { box-shadow: 0 0 40px rgba(13, 110, 253, 0.4), inset 0 0 20px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 0 60px rgba(13, 110, 253, 0.6), inset 0 0 30px rgba(255,255,255,0.2); }
+}
+
+/* ============================================
    LOADING ANIMATION
    ============================================ */
 .loading-spinner {

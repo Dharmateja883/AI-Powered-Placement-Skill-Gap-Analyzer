@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillBridge - AI Placement Analyzer | Veltech University</title>
+    <title>AI Helpdesk Ticket Classifier</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Three.js and Vanta.js for 3D animated background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 </head>
 
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow" style="opacity: 0.95;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/">
-                <i class="fas fa-brain me-2"></i>SkillBridge
+                <i class="fas fa-headset me-2 text-warning"></i>AI Ticket Classifier
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -40,69 +43,68 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="container">
+    <!-- Hero Section with Vanta 3D Background -->
+    <section class="hero-section" id="vanta-bg">
+        <div class="container" style="position: relative; z-index: 10;">
             <div class="row align-items-center min-vh-100 pt-5">
                 <div class="col-lg-6">
-                    <span class="badge bg-warning text-dark mb-3 px-3 py-2">
-                        <i class="fas fa-robot me-1"></i> AI-Powered
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2 shadow-sm border border-warning rounded-pill">
+                        <i class="fas fa-robot me-1"></i> AI-Powered Operations
                     </span>
-                    <h1 class="display-4 fw-bold text-white mb-4">
-                        Bridge the Gap Between
-                        <span class="text-warning">Your Skills</span>
-                        and Your
-                        <span class="text-warning">Dream Job</span>
+                    <h1 class="display-4 fw-bold text-white mb-4 drop-shadow-md">
+                        Automate Support with
+                        <span class="text-warning">Intelligent</span>
+                        Ticket <span class="text-warning">Routing</span>
                     </h1>
-                    <p class="lead text-white-75 mb-4">
-                        SkillBridge analyzes your resume, identifies skill gaps,
-                        and recommends personalized learning paths to boost your
-                        placement readiness.
+                    <p class="lead text-white-75 mb-4" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                        Our AI Helpdesk Ticket Classifier automatically categorizes, prioritizes,
+                        and routes incoming support tickets to the right team, reducing response
+                        time and improving customer satisfaction.
                     </p>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="/register" class="btn btn-warning btn-lg px-4 fw-bold">
-                            <i class="fas fa-rocket me-2"></i>Start Free Analysis
+                    <div class="d-flex gap-3 flex-wrap mt-4">
+                        <a href="/register" class="btn btn-warning btn-lg px-4 fw-bold shadow-lg transform-hover">
+                            <i class="fas fa-rocket me-2"></i>Start Free Trial
                         </a>
-                        <a href="#how-it-works" class="btn btn-outline-light btn-lg px-4">
-                            <i class="fas fa-play-circle me-2"></i>See How It Works
+                        <a href="#features" class="btn btn-outline-light btn-lg px-4 shadow-lg transform-hover glass-btn">
+                            <i class="fas fa-play-circle me-2"></i>Explore Features
                         </a>
                     </div>
                     <!-- Stats Row -->
                     <div class="row mt-5 text-white">
                         <div class="col-4 text-center">
-                            <h3 class="fw-bold text-warning">500+</h3>
-                            <small>Students Analyzed</small>
+                            <h3 class="fw-bold text-warning text-shadow-glow">1M+</h3>
+                            <small class="text-uppercase fw-semibold tracking-wider">Tickets Processed</small>
                         </div>
                         <div class="col-4 text-center">
-                            <h3 class="fw-bold text-warning">50+</h3>
-                            <small>Partner Companies</small>
+                            <h3 class="fw-bold text-warning text-shadow-glow">99%</h3>
+                            <small class="text-uppercase fw-semibold tracking-wider">Accuracy Rate</small>
                         </div>
                         <div class="col-4 text-center">
-                            <h3 class="fw-bold text-warning">95%</h3>
-                            <small>Accuracy Rate</small>
+                            <h3 class="fw-bold text-warning text-shadow-glow">80%</h3>
+                            <small class="text-uppercase fw-semibold tracking-wider">Time Saved</small>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 d-none d-lg-block">
-                    <div class="hero-animation">
-                        <!-- Animated skill cards -->
-                        <div class="skill-float-card card-1">
-                            <i class="fab fa-python"></i> Python
+                <div class="col-lg-6 d-none d-lg-block perspective-container">
+                    <div class="hero-animation ticket-animation-wrapper">
+                        <!-- Animated ticket cards -->
+                        <div class="skill-float-card card-1 ticket-card bg-dark bg-opacity-75 text-white border-primary shadow-lg">
+                            <i class="fas fa-exclamation-circle text-danger"></i> High Priority - App Crash
                         </div>
-                        <div class="skill-float-card card-2">
-                            <i class="fab fa-java"></i> Java
+                        <div class="skill-float-card card-2 ticket-card bg-dark bg-opacity-75 text-white border-warning shadow-lg">
+                            <i class="fas fa-key text-warning"></i> Password Reset Request
                         </div>
-                        <div class="skill-float-card card-3">
-                            <i class="fas fa-database"></i> SQL
+                        <div class="skill-float-card card-3 ticket-card bg-dark bg-opacity-75 text-white border-info shadow-lg">
+                            <i class="fas fa-file-invoice-dollar text-info"></i> Billing Inquiry
                         </div>
-                        <div class="skill-float-card card-4">
-                            <i class="fas fa-brain"></i> ML
+                        <div class="skill-float-card card-4 ticket-card bg-dark bg-opacity-75 text-white border-success shadow-lg">
+                            <i class="fas fa-cog text-success"></i> Feature Request
                         </div>
-                        <!-- Central score display -->
+                        <!-- Central AI core display -->
                         <div class="score-display">
-                            <div class="score-circle">
-                                <span class="score-number">85%</span>
-                                <span class="score-label">Match</span>
+                            <div class="score-circle ai-core-glow shadow-lg border border-primary border-4">
+                                <i class="fas fa-brain fa-4x text-white mb-2"></i>
+                                <span class="score-label text-uppercase fw-bold mt-2">Processing</span>
                             </div>
                         </div>
                     </div>
@@ -112,107 +114,97 @@
     </section>
 
     <!-- Features Section -->
-    <section class="py-5" id="features">
-        <div class="container">
+    <section class="py-5 bg-light" id="features">
+        <div class="container py-4">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Powerful AI Features</h2>
-                <p class="text-muted">Everything you need to ace your placement</p>
+                <span class="text-primary fw-bold text-uppercase tracking-wider">Capabilities</span>
+                <h2 class="fw-bold mt-2 display-6">Next-Generation Helpdesk AI</h2>
+                <div class="mx-auto mt-3 mb-4" style="height: 4px; width: 60px; background: linear-gradient(90deg, var(--primary-color), var(--gradient-end)); border-radius: 2px;"></div>
+                <p class="text-muted lead">Streamline your support operations with intelligent automation.</p>
             </div>
-            <div class="row g-4">
+            <div class="row g-4 mt-2">
 
                 <!-- Feature 1 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-primary mb-3">
-                            <i class="fas fa-file-alt text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-primary bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-tags text-white fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">AI Resume Parser</h5>
-                        <p class="text-muted">
-                            Upload your resume and our NLP engine automatically
-                            extracts your skills, projects, and experience.
-                            Get an instant ATS Score.
+                        <h5 class="fw-bold mb-3">Auto-Categorization</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Instantly classify incoming tickets into predefined categories using advanced Natural Language Processing.
                         </p>
-                        <a href="/register" class="btn btn-outline-primary mt-auto">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-primary text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
                 <!-- Feature 2 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-success mb-3">
-                            <i class="fas fa-chart-line text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-danger bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-tachometer-alt text-white fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">Skill Gap Analysis</h5>
-                        <p class="text-muted">
-                            Compare your skills with real job requirements from
-                            top companies. See exactly what skills you need to
-                            learn and in what order.
+                        <h5 class="fw-bold mb-3">Sentiment & Priority</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Analyze customer sentiment to automatically flag urgent issues and escalate frustrated users.
                         </p>
-                        <a href="/register" class="btn btn-outline-success mt-auto">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-danger text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
                 <!-- Feature 3 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-warning mb-3">
-                            <i class="fas fa-briefcase text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-success bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-route text-white fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">Smart Job Matching</h5>
-                        <p class="text-muted">
-                            AI matches you with the best-fit jobs based on your
-                            CGPA, skills, branch, and test scores.
-                            Ranked by match percentage.
+                        <h5 class="fw-bold mb-3">Smart Routing</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Direct tickets to the most qualified agent or department based on workload and historical expertise.
                         </p>
-                        <a href="/register" class="btn btn-outline-warning mt-auto text-dark">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-success text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
                 <!-- Feature 4 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-info mb-3">
-                            <i class="fas fa-graduation-cap text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-info bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-robot text-white fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">Course Recommendations</h5>
-                        <p class="text-muted">
-                            Get personalized course suggestions from Coursera,
-                            Udemy, and YouTube for every missing skill
-                            in your profile.
+                        <h5 class="fw-bold mb-3">Automated Responses</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Draft AI-generated replies for common queries and attach relevant knowledge base articles instantly.
                         </p>
-                        <a href="/register" class="btn btn-outline-info mt-auto text-dark">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-info text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
                 <!-- Feature 5 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-danger mb-3">
-                            <i class="fas fa-tasks text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-warning bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-chart-pie text-dark fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">Aptitude Testing</h5>
-                        <p class="text-muted">
-                            Practice aptitude, verbal, and technical tests.
-                            Track your scores over time and see improvement
-                            in your readiness score.
+                        <h5 class="fw-bold mb-3">Analytics Dashboard</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Gain insights into ticket trends, resolution times, and team performance with interactive 3D charts.
                         </p>
-                        <a href="/register" class="btn btn-outline-danger mt-auto">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-warning text-dark text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
                 <!-- Feature 6 -->
                 <div class="col-md-4">
-                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column">
-                        <div class="feature-icon bg-secondary mb-3">
-                            <i class="fas fa-mobile-alt text-white"></i>
+                    <div class="feature-card card h-100 border-0 shadow-sm p-4 d-flex flex-column hover-lift-3d">
+                        <div class="feature-icon bg-secondary bg-gradient mb-4 shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-plug text-white fa-2x"></i>
                         </div>
-                        <h5 class="fw-bold">Mobile Notifications</h5>
-                        <p class="text-muted">
-                            Get instant push notifications on your Android phone
-                            for new job openings, drive alerts,
-                            and test reminders.
+                        <h5 class="fw-bold mb-3">Seamless Integrations</h5>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Connects out-of-the-box with Jira, Zendesk, ServiceNow, Slack, and your custom internal systems.
                         </p>
-                        <a href="/register" class="btn btn-outline-secondary mt-auto text-dark">Try Feature &rarr;</a>
+                        <a href="/register" class="fw-bold text-secondary text-decoration-none icon-link icon-link-hover mt-auto">Explore Feature <i class="fas fa-arrow-right ms-1 transition-transform"></i></a>
                     </div>
                 </div>
 
@@ -235,20 +227,40 @@
     {% endwith %}
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="bg-dark text-white py-4 border-top border-secondary">
         <div class="container text-center">
             <p class="mb-1">
-                <strong>SkillBridge</strong> - AI Placement & Skill Gap Analyzer
+                <strong>AI Helpdesk Ticket Classifier</strong> - Intelligent Support Operations
             </p>
             <p class="text-muted small mb-0">
-                Built with Python, Java, HTML, CSS, SQL |
-                Veltech University, Chennai | B.Tech CSE Major Project
+                Powered by Advanced NLP and Machine Learning
             </p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- Initialize Vanta 3D Background -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VANTA) {
+                VANTA.NET({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x0d6efd,
+                    backgroundColor: 0x1a1a2e,
+                    points: 15.00,
+                    maxDistance: 20.00,
+                    spacing: 16.00
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
