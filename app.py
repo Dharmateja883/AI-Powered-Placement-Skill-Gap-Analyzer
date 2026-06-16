@@ -1,5 +1,5 @@
 # ============================================
-# SkillBridge - Main Flask Application
+# AI Helpdesk Ticket Classifier - Main Flask App
 # File: app.py
 # ============================================
 
@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from models import SkillGapAnalyzer, PlacementPredictor
 from parsers import ResumeParser
 
@@ -17,13 +17,14 @@ from parsers import ResumeParser
 # App Configuration
 # ============================================
 app = Flask(__name__)
-app.secret_key = 'skillbridge_secret_2024_veltech'
+app.secret_key = 'helpdesk_classifier_secret_2024'
+app.permanent_session_lifetime = timedelta(days=7)
 
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Teja@nov22'
-app.config['MYSQL_DB'] = 'skillbridge_db'
+app.config['MYSQL_DB'] = 'skillbridge_db' # Retaining the same DB name as requested for the underlying data source if any, or changing if needed.
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # File Upload Configuration
@@ -125,6 +126,7 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        remember = request.form.get('remember')
 
         cursor = mysql.connection.cursor()
         cursor.execute(
@@ -135,6 +137,11 @@ def login():
         cursor.close()
 
         if user and check_password_hash(user['password_hash'], password):
+            if remember:
+                session.permanent = True
+            else:
+                session.permanent = False
+
             session['user_id'] = user['user_id']
             session['full_name'] = user['full_name']
             session['role'] = user['role']
